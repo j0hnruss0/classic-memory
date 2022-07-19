@@ -3,4 +3,5 @@ export interface Card {
     cardImage: string;
     isClicked: boolean;
     isMatch: boolean;
+    isPaired: boolean;
 }

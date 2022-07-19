@@ -14,6 +14,12 @@ import { trigger, state, style, animate, transition, query, stagger } from '@ang
       state('closed', style({
         backgroundColor: 'aqua'
       })),
+      state('right', style({
+        backgroundColor: 'green'
+      })),
+      state('wrong', style({
+        backgroundColor: 'red'
+      })),
       state('show', style({
         opacity: 1
       })),
@@ -28,11 +34,13 @@ import { trigger, state, style, animate, transition, query, stagger } from '@ang
 })
 export class GameBoardComponent implements OnInit {
   cards = new Array<Card>();
+  guesses: number;
+  pairsRight: number;
   firstPick = {
     id: 100,
     icon: ''
   };
-  disable = false;
+  disable: boolean;
   constructor() { }
 
   ngOnInit() {
@@ -40,6 +48,13 @@ export class GameBoardComponent implements OnInit {
   }
 
   gameSet(): any {
+    this.guesses = 30;
+    this.pairsRight = 0;
+    this.firstPick = {
+      id: 100,
+      icon: ''
+    }
+    this.disable = false;
     let images = [
       'star', 
       'moon', 
@@ -66,7 +81,8 @@ export class GameBoardComponent implements OnInit {
         id: i, 
         isClicked: false,
         cardImage: images[choice],
-        isMatch: false
+        isMatch: false,
+        isPaired: false
       }
       
       if (!selected.includes(images[choice])) {
@@ -93,26 +109,67 @@ export class GameBoardComponent implements OnInit {
       } else {
         if (this.firstPick.icon === this.cards[index].cardImage) {
           this.cards[index].isMatch = true;
+          this.cards[index].isPaired = true;
+          this.cards[this.firstPick.id].isPaired = true;
+          this.pairsRight += 1;
+          this.gameWon();
           this.firstPick = {
             id: 100,
             icon: ''
           }
         } else {
           this.disable = true;
-          setTimeout(()=> {
-            this.cards[index].isClicked = false;
-            this.cards[index].isMatch = false;
-            this.cards[this.firstPick.id].isClicked = false;
-            this.cards[this.firstPick.id].isMatch = false;
-            this.firstPick = {
-              id: 100,
-              icon: ''
-            }
-            this.disable = false;
-          }, 2000);
-        }
-      }
-    }
+          this.guesses -= 1;
+          if (this.guesses > 0) {
+            setTimeout(()=> {
+              this.cards[index].isClicked = false;
+              this.cards[index].isMatch = false;
+              this.cards[this.firstPick.id].isClicked = false;
+              this.cards[this.firstPick.id].isMatch = false;
+              this.firstPick = {
+                id: 100,
+                icon: ''
+              }
+              this.disable = false;
+            }, 1500);
+          };
+        };
+      };
+    };
+    this.gameLost();
 
   };
+
+  cardState(id: string): string {
+    if (this.cards[id].isClicked) {
+      if (!this.cards[id].isMatch) {
+        return 'wrong'
+      } else if (this.cards[id].isPaired) {
+        return 'right'
+      } else {
+        return 'open'
+      }
+    } else {
+      return 'closed'
+    }
+  };
+
+  gameLost(): void {
+    if (this.guesses === 0) {
+      for (let i = 0; i < this.cards.length; i ++) {
+        this.cards[i].isMatch = false;
+        this.cards[i].isClicked = true;
+      }
+    }
+  }
+
+  gameWon(): void {
+    if (this.guesses > 0 && this.pairsRight === 18) {
+      for (let i = 0; i < this.cards.length; i ++) {
+        this.cards[i].isPaired = true;
+        this.cards[i].isMatch = true;
+        this.cards[i].isClicked = true;
+      }
+    }
+  }
 }

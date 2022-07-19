@@ -71,7 +71,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h2>Memory Card Game</h2>\n<div class=\"reset-button\">\n    <button (click)=\"gameSet()\">Reset</button>    \n</div>\n\n<mat-grid-list cols=\"6\" rowHeight=\"3:4\">\n    <mat-grid-tile \n        [@flipCard]=\"card.isClicked? 'open': 'closed'\" \n        (click)=\"cardChoice(card.id)\"\n        *ngFor=\"let card of cards; let index = i\"\n    >\n        <app-game-card \n            [eachCard]=\"card\"\n            [@flipCard]=\"card.isClicked? 'show': 'hide'\"\n        >\n        </app-game-card>\n    </mat-grid-tile>\n</mat-grid-list>\n\n";
+    __webpack_exports__["default"] = "<h2>Memory Card Game</h2>\n<p class=\"score-card\">Spare guesses left: {{ guesses }}</p>\n<div class=\"reset-button\">\n    <button *ngIf=\"guesses > 0 && pairsRight < 18\" (click)=\"gameSet()\">Reset</button>\n    <div *ngIf=\"guesses === 0\">\n        <span style=\"display: inline-block;\">\n            <h4>You Lose!<button style=\"margin-left: 15px;\" (click)=\"gameSet()\">Try again?</button></h4>\n        </span>  \n    </div>\n    <div *ngIf=\"pairsRight === 18\">\n        <span style=\"display: inline-block;\">\n            <h4>You Win!<button style=\"margin-left: 15px;\" (click)=\"gameSet()\">Try again?</button></h4>\n        </span>  \n    </div>\n        \n</div>\n\n<mat-grid-list cols=\"6\" rowHeight=\"3:4\">\n    <mat-grid-tile \n        [@flipCard]=\"cardState(card.id)\" \n        (click)=\"cardChoice(card.id)\"\n        *ngFor=\"let card of cards; let index = i\"\n    >\n        <app-game-card \n            [eachCard]=\"card\"\n            [@flipCard]=\"card.isClicked? 'show': 'hide'\"\n        >\n        </app-game-card>\n    </mat-grid-tile>\n</mat-grid-list>\n\n";
     /***/
   },
 
@@ -923,7 +923,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "mat-grid-tile {\n  border-radius: 20px;\n  background-color: aqua;\n}\n\nmat-grid-list {\n  margin: 30px;\n  max-width: 800px;\n}\n\nh2 {\n  padding-left: 25px;\n}\n\n.reset-button {\n  padding-left: 30px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZ2FtZS1ib2FyZC9DOlxcVXNlcnNcXGpvaG5ueVxcRGVza3RvcFxcQW5ndWxhciBQcm9qZWN0c1xcbWVtb3J5LWNhcmRzL3NyY1xcYXBwXFxnYW1lLWJvYXJkXFxnYW1lLWJvYXJkLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9nYW1lLWJvYXJkL2dhbWUtYm9hcmQuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxtQkFBQTtFQUNBLHNCQUFBO0FDQ0o7O0FERUE7RUFDSSxZQUFBO0VBQ0EsZ0JBQUE7QUNDSjs7QURFQTtFQUNJLGtCQUFBO0FDQ0o7O0FERUE7RUFDSSxrQkFBQTtBQ0NKIiwiZmlsZSI6InNyYy9hcHAvZ2FtZS1ib2FyZC9nYW1lLWJvYXJkLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsibWF0LWdyaWQtdGlsZSB7XHJcbiAgICBib3JkZXItcmFkaXVzOiAyMHB4O1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogYXF1YTtcclxufVxyXG5cclxubWF0LWdyaWQtbGlzdCB7XHJcbiAgICBtYXJnaW46IDMwcHg7XHJcbiAgICBtYXgtd2lkdGg6IDgwMHB4O1xyXG59XHJcblxyXG5oMiB7XHJcbiAgICBwYWRkaW5nLWxlZnQ6IDI1cHg7XHJcbn1cclxuXHJcbi5yZXNldC1idXR0b24ge1xyXG4gICAgcGFkZGluZy1sZWZ0OiAzMHB4O1xyXG59IiwibWF0LWdyaWQtdGlsZSB7XG4gIGJvcmRlci1yYWRpdXM6IDIwcHg7XG4gIGJhY2tncm91bmQtY29sb3I6IGFxdWE7XG59XG5cbm1hdC1ncmlkLWxpc3Qge1xuICBtYXJnaW46IDMwcHg7XG4gIG1heC13aWR0aDogODAwcHg7XG59XG5cbmgyIHtcbiAgcGFkZGluZy1sZWZ0OiAyNXB4O1xufVxuXG4ucmVzZXQtYnV0dG9uIHtcbiAgcGFkZGluZy1sZWZ0OiAzMHB4O1xufSJdfQ== */";
+    __webpack_exports__["default"] = "mat-grid-tile {\n  border-radius: 20px;\n  cursor: pointer;\n}\n\nmat-grid-list {\n  margin: 30px;\n  max-width: 800px;\n}\n\nh2, .score-card {\n  padding-left: 25px;\n}\n\n.reset-button {\n  padding-left: 30px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZ2FtZS1ib2FyZC9DOlxcVXNlcnNcXGpvaG5ueVxcRGVza3RvcFxcQW5ndWxhciBQcm9qZWN0c1xcbWVtb3J5LWNhcmRzL3NyY1xcYXBwXFxnYW1lLWJvYXJkXFxnYW1lLWJvYXJkLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9nYW1lLWJvYXJkL2dhbWUtYm9hcmQuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxtQkFBQTtFQUNBLGVBQUE7QUNDSjs7QURFQTtFQUNJLFlBQUE7RUFDQSxnQkFBQTtBQ0NKOztBREVBO0VBQ0ksa0JBQUE7QUNDSjs7QURFQTtFQUNJLGtCQUFBO0FDQ0oiLCJmaWxlIjoic3JjL2FwcC9nYW1lLWJvYXJkL2dhbWUtYm9hcmQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJtYXQtZ3JpZC10aWxlIHtcclxuICAgIGJvcmRlci1yYWRpdXM6IDIwcHg7XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbn1cclxuXHJcbm1hdC1ncmlkLWxpc3Qge1xyXG4gICAgbWFyZ2luOiAzMHB4O1xyXG4gICAgbWF4LXdpZHRoOiA4MDBweDtcclxufVxyXG5cclxuaDIsIC5zY29yZS1jYXJkIHtcclxuICAgIHBhZGRpbmctbGVmdDogMjVweDtcclxufVxyXG5cclxuLnJlc2V0LWJ1dHRvbiB7XHJcbiAgICBwYWRkaW5nLWxlZnQ6IDMwcHg7XHJcbn0iLCJtYXQtZ3JpZC10aWxlIHtcbiAgYm9yZGVyLXJhZGl1czogMjBweDtcbiAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG5tYXQtZ3JpZC1saXN0IHtcbiAgbWFyZ2luOiAzMHB4O1xuICBtYXgtd2lkdGg6IDgwMHB4O1xufVxuXG5oMiwgLnNjb3JlLWNhcmQge1xuICBwYWRkaW5nLWxlZnQ6IDI1cHg7XG59XG5cbi5yZXNldC1idXR0b24ge1xuICBwYWRkaW5nLWxlZnQ6IDMwcHg7XG59Il19 */";
     /***/
   },
 
@@ -974,7 +974,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           id: 100,
           icon: ''
         };
-        this.disable = false;
       }
 
       _createClass(GameBoardComponent, [{
@@ -985,6 +984,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "gameSet",
         value: function gameSet() {
+          this.guesses = 30;
+          this.pairsRight = 0;
+          this.firstPick = {
+            id: 100,
+            icon: ''
+          };
+          this.disable = false;
           var images = ['star', 'moon', 'sun', 'face', 'coin', 'dog', 'cat', 'dragon', 'shark', 'heart', 'spade', 'club', 'diamond', 'joker', 'candy', 'cash', 'balloon', 'pint'];
           var selected = [];
 
@@ -994,7 +1000,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               id: i,
               isClicked: false,
               cardImage: images[choice],
-              isMatch: false
+              isMatch: false,
+              isPaired: false
             };
 
             if (!selected.includes(images[choice])) {
@@ -1023,24 +1030,77 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             } else {
               if (this.firstPick.icon === this.cards[index].cardImage) {
                 this.cards[index].isMatch = true;
+                this.cards[index].isPaired = true;
+                this.cards[this.firstPick.id].isPaired = true;
+                this.pairsRight += 1;
+                this.gameWon();
                 this.firstPick = {
                   id: 100,
                   icon: ''
                 };
               } else {
                 this.disable = true;
-                setTimeout(function () {
-                  _this.cards[index].isClicked = false;
-                  _this.cards[index].isMatch = false;
-                  _this.cards[_this.firstPick.id].isClicked = false;
-                  _this.cards[_this.firstPick.id].isMatch = false;
-                  _this.firstPick = {
-                    id: 100,
-                    icon: ''
-                  };
-                  _this.disable = false;
-                }, 2000);
+                this.guesses -= 1;
+
+                if (this.guesses > 0) {
+                  setTimeout(function () {
+                    _this.cards[index].isClicked = false;
+                    _this.cards[index].isMatch = false;
+                    _this.cards[_this.firstPick.id].isClicked = false;
+                    _this.cards[_this.firstPick.id].isMatch = false;
+                    _this.firstPick = {
+                      id: 100,
+                      icon: ''
+                    };
+                    _this.disable = false;
+                  }, 1500);
+                }
+
+                ;
               }
+
+              ;
+            }
+
+            ;
+          }
+
+          ;
+          this.gameLost();
+        }
+      }, {
+        key: "cardState",
+        value: function cardState(id) {
+          if (this.cards[id].isClicked) {
+            if (!this.cards[id].isMatch) {
+              return 'wrong';
+            } else if (this.cards[id].isPaired) {
+              return 'right';
+            } else {
+              return 'open';
+            }
+          } else {
+            return 'closed';
+          }
+        }
+      }, {
+        key: "gameLost",
+        value: function gameLost() {
+          if (this.guesses === 0) {
+            for (var i = 0; i < this.cards.length; i++) {
+              this.cards[i].isMatch = false;
+              this.cards[i].isClicked = true;
+            }
+          }
+        }
+      }, {
+        key: "gameWon",
+        value: function gameWon() {
+          if (this.guesses > 0 && this.pairsRight === 18) {
+            for (var i = 0; i < this.cards.length; i++) {
+              this.cards[i].isPaired = true;
+              this.cards[i].isMatch = true;
+              this.cards[i].isClicked = true;
             }
           }
         }
@@ -1058,6 +1118,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         backgroundColor: 'orange'
       })), Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["state"])('closed', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({
         backgroundColor: 'aqua'
+      })), Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["state"])('right', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({
+        backgroundColor: 'green'
+      })), Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["state"])('wrong', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({
+        backgroundColor: 'red'
       })), Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["state"])('show', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({
         opacity: 1
       })), Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["state"])('hide', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({

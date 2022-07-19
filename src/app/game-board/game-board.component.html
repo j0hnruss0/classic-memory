@@ -1,11 +1,23 @@
 <h2>Memory Card Game</h2>
+<p class="score-card">Spare guesses left: {{ guesses }}</p>
 <div class="reset-button">
-    <button (click)="gameSet()">Reset</button>    
+    <button *ngIf="guesses > 0 && pairsRight < 18" (click)="gameSet()">Reset</button>
+    <div *ngIf="guesses === 0">
+        <span style="display: inline-block;">
+            <h4>You Lose!<button style="margin-left: 15px;" (click)="gameSet()">Try again?</button></h4>
+        </span>  
+    </div>
+    <div *ngIf="pairsRight === 18">
+        <span style="display: inline-block;">
+            <h4>You Win!<button style="margin-left: 15px;" (click)="gameSet()">Try again?</button></h4>
+        </span>  
+    </div>
+        
 </div>
 
 <mat-grid-list cols="6" rowHeight="3:4">
     <mat-grid-tile 
-        [@flipCard]="card.isClicked? 'open': 'closed'" 
+        [@flipCard]="cardState(card.id)" 
         (click)="cardChoice(card.id)"
         *ngFor="let card of cards; let index = i"
     >

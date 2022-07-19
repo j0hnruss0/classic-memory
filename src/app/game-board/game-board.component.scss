@@ -1,6 +1,6 @@
 mat-grid-tile {
     border-radius: 20px;
-    background-color: aqua;
+    cursor: pointer;
 }
 
 mat-grid-list {
@@ -8,7 +8,7 @@ mat-grid-list {
     max-width: 800px;
 }
 
-h2 {
+h2, .score-card {
     padding-left: 25px;
 }
 
