@@ -1,0 +1,19 @@
+<h2>Memory Card Game</h2>
+<div class="reset-button">
+    <button (click)="gameSet()">Reset</button>    
+</div>
+
+<mat-grid-list cols="6" rowHeight="3:4">
+    <mat-grid-tile 
+        [@flipCard]="card.isClicked? 'open': 'closed'" 
+        (click)="cardChoice(card.id)"
+        *ngFor="let card of cards; let index = i"
+    >
+        <app-game-card 
+            [eachCard]="card"
+            [@flipCard]="card.isClicked? 'show': 'hide'"
+        >
+        </app-game-card>
+    </mat-grid-tile>
+</mat-grid-list>
+
